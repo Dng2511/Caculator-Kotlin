@@ -52,13 +52,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun chooseOperator(selectedOperator: String) {
-            currentInput += selectedOperator
-            func.text = currentInput
+        currentInput += selectedOperator
+        func.text = currentInput
     }
 
     private fun calculateResult() {
-        val function = func.text
-        val res = ExpressionBuilder(function.toString()).build().evaluate()
+        val res = ExpressionBuilder(func.text.toString()).build().evaluate().toInt()
         result.text = res.toString()
 
     }
