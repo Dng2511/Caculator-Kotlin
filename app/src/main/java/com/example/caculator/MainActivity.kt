@@ -12,9 +12,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var result: android.widget.TextView
     private lateinit var func: android.widget.TextView
     private var currentInput = ""
-    private var operator = ""
-    private var firstOperand = ""
-    private var secondOperand = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         func = findViewById(R.id.func)
         val buttons = listOf(
             R.id.b0, R.id.b1, R.id.b2, R.id.b3, R.id.b4,
-            R.id.b5, R.id.b6, R.id.b7, R.id.b8, R.id.b9
+            R.id.b5, R.id.b6, R.id.b7, R.id.b8, R.id.b9, R.id.button23
         )
 
         for (id in buttons) {
@@ -57,16 +54,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calculateResult() {
-        val res = ExpressionBuilder(func.text.toString()).build().evaluate().toInt()
-        result.text = res.toString()
+        try {
+            val res = ExpressionBuilder(func.text.toString()).build().evaluate().toInt()
+            result.text = res.toString()
+        } catch (e: Exception) {
+            result.text = "Error"
+        }
 
     }
 
     private fun clearInput() {
         currentInput = ""
-        operator = ""
-        firstOperand = ""
-        secondOperand = ""
         result.text = "0"
         func.text = ""
     }
